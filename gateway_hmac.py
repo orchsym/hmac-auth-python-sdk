@@ -49,6 +49,9 @@ def extract_path(url):
     url_object = urlparse(url)
     path = url_object.path
 
+    if url_object.query != '':
+        path += '?' + url_object.query
+
     # the env prefix of URI, like /env-101, is used for gateway environment proxy,
     # and will not be used in HMAC signature computation.
     return re.sub(r'^/env-\d+/', '/', path)
